@@ -64,9 +64,8 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
 
-		ps.Configuration = map[string]any{}
-		if v, ok := creds[apiKey]; ok {
-			ps.Configuration[apiKey] = v
+		ps.Configuration = map[string]any{
+			"api_key": creds["api_key"],
 		}
 
 		return ps, nil

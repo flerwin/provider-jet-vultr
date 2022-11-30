@@ -9,16 +9,18 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
-	resource "github.com/flerwin/provider-vultr/internal/controller/null/resource"
+	storage "github.com/flerwin/provider-vultr/internal/controller/object/storage"
 	providerconfig "github.com/flerwin/provider-vultr/internal/controller/providerconfig"
+	instance "github.com/flerwin/provider-vultr/internal/controller/vultr/instance"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		resource.Setup,
+		storage.Setup,
 		providerconfig.Setup,
+		instance.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

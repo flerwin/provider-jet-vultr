@@ -7,10 +7,10 @@ package config
 import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
+	"github.com/flerwin/provider-vultr/config/instance"
+	"github.com/flerwin/provider-vultr/config/objectstorage"
 
 	ujconfig "github.com/upbound/upjet/pkg/config"
-
-	"github.com/flerwin/provider-vultr/config/null"
 )
 
 const (
@@ -34,7 +34,8 @@ func GetProvider() *ujconfig.Provider {
 
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
-		null.Configure,
+		objectstorage.Configure,
+		instance.Configure,
 	} {
 		configure(pc)
 	}

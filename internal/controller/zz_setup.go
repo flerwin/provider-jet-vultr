@@ -9,9 +9,9 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
-	storage "github.com/flerwin/provider-vultr/internal/controller/object/storage"
-	providerconfig "github.com/flerwin/provider-vultr/internal/controller/providerconfig"
-	instance "github.com/flerwin/provider-vultr/internal/controller/vultr/instance"
+	storage "github.com/flerwin/provider-jet-vultr/internal/controller/object/storage"
+	providerconfig "github.com/flerwin/provider-jet-vultr/internal/controller/providerconfig"
+	instance "github.com/flerwin/provider-jet-vultr/internal/controller/vultr/instance"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to

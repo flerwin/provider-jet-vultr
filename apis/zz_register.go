@@ -10,10 +10,10 @@ package apis
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1alpha1 "github.com/flerwin/provider-vultr/apis/object/v1alpha1"
-	v1alpha1apis "github.com/flerwin/provider-vultr/apis/v1alpha1"
-	v1beta1 "github.com/flerwin/provider-vultr/apis/v1beta1"
-	v1alpha1vultr "github.com/flerwin/provider-vultr/apis/vultr/v1alpha1"
+	v1alpha1 "github.com/flerwin/provider-jet-vultr/apis/object/v1alpha1"
+	v1alpha1apis "github.com/flerwin/provider-jet-vultr/apis/v1alpha1"
+	v1beta1 "github.com/flerwin/provider-jet-vultr/apis/v1beta1"
+	v1alpha1vultr "github.com/flerwin/provider-jet-vultr/apis/vultr/v1alpha1"
 )
 
 func init() {

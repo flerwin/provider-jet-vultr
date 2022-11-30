@@ -7,15 +7,15 @@ package config
 import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
-	"github.com/flerwin/provider-vultr/config/instance"
-	"github.com/flerwin/provider-vultr/config/objectstorage"
+	"github.com/flerwin/provider-jet-vultr/config/instance"
+	"github.com/flerwin/provider-jet-vultr/config/objectstorage"
 
 	ujconfig "github.com/upbound/upjet/pkg/config"
 )
 
 const (
 	resourcePrefix = "vultr"
-	modulePath     = "github.com/flerwin/provider-vultr"
+	modulePath     = "github.com/flerwin/provider-jet-vultr"
 )
 
 //go:embed schema.json

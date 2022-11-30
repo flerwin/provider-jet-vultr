@@ -11,7 +11,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/pipeline"
 
-	"github.com/flerwin/provider-vultr/config"
+	"github.com/flerwin/provider-jet-vultr/config"
 )
 
 func main() {

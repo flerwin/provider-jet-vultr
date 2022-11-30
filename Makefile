@@ -1,7 +1,7 @@
 # ====================================================================================
 # Setup Project
 
-PROJECT_NAME := provider-vultr
+PROJECT_NAME := provider-jet-vultr
 PROJECT_REPO := github.com/flerwin/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION := 1.3.3

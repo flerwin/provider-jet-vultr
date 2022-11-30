@@ -1,6 +1,6 @@
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
-  name: provider-vultr
+  name: provider-jet-vultr
 spec:
-  package: flerwin/provider-vultr:v0.1.0
+  package: flerwin/provider-jet-vultr:v0.1.0

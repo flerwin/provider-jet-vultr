@@ -1,4 +1,4 @@
-module github.com/flerwin/provider-vultr
+module github.com/flerwin/provider-jet-vultr
 
 go 1.19
 

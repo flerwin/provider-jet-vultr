@@ -24,12 +24,12 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	"github.com/flerwin/provider-vultr/apis"
-	"github.com/flerwin/provider-vultr/apis/v1alpha1"
-	"github.com/flerwin/provider-vultr/config"
-	"github.com/flerwin/provider-vultr/internal/clients"
-	"github.com/flerwin/provider-vultr/internal/controller"
-	"github.com/flerwin/provider-vultr/internal/features"
+	"github.com/flerwin/provider-jet-vultr/apis"
+	"github.com/flerwin/provider-jet-vultr/apis/v1alpha1"
+	"github.com/flerwin/provider-jet-vultr/config"
+	"github.com/flerwin/provider-jet-vultr/internal/clients"
+	"github.com/flerwin/provider-jet-vultr/internal/controller"
+	"github.com/flerwin/provider-jet-vultr/internal/features"
 )
 
 func main() {
@@ -50,7 +50,7 @@ func main() {
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 
 	zl := zap.New(zap.UseDevMode(*debug))
-	log := logging.NewLogrLogger(zl.WithName("provider-vultr"))
+	log := logging.NewLogrLogger(zl.WithName("provider-jet-vultr"))
 	if *debug {
 		// The controller-runtime runs with a no-op logger by default. It is
 		// *very* verbose even at info level, so we only provide it a real
@@ -65,7 +65,7 @@ func main() {
 
 	mgr, err := ctrl.NewManager(cfg, ctrl.Options{
 		LeaderElection:             *leaderElection,
-		LeaderElectionID:           "crossplane-leader-election-provider-vultr",
+		LeaderElectionID:           "crossplane-leader-election-provider-jet-vultr",
 		SyncPeriod:                 syncPeriod,
 		LeaderElectionResourceLock: resourcelock.LeasesResourceLock,
 		LeaseDuration:              func() *time.Duration { d := 60 * time.Second; return &d }(),

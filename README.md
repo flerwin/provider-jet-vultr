@@ -7,54 +7,46 @@ Vultr API.
 
 ## Getting Started
 
-Install the provider by using the following command after changing the image tag
-to the [latest release](https://marketplace.upbound.io/providers/flerwin/provider-jet-vultr):
+Very quick overview on how to get up and running.
+
+### Install Crossplane
+
+Get crossplane installed by doing something like the following:
+
 ```
-up ctp provider install flerwin/provider-jet-vultr:v0.1.0
+kubectl create namespace crossplane-system
+helm install crossplane --namespace crossplane-system crossplane-stable/crossplane
 ```
+### Install the provider crds
 
-Alternatively, you can use declarative installation:
+Install the provider crds:
+
 ```
-cat <<EOF | kubectl apply -f -
-apiVersion: pkg.crossplane.io/v1
-kind: Provider
-metadata:
-  name: provider-jet-vultr
-spec:
-  package: flerwin/provider-jet-vultr:v0.1.0
-EOF
-```
-
-Notice that in this example Provider resource is referencing ControllerConfig with debug enabled.
-
-You can see the API reference [here](https://doc.crds.dev/github.com/flerwin/provider-jet-vultr).
-
-## Developing
-
-Run code-generation pipeline:
-```console
-go run cmd/generator/main.go "$PWD"
+kubectl apply -f provider/crds
 ```
 
-Run against a Kubernetes cluster:
+### Run the provider
 
-```console
+Just run the provider by issuing:
+
+````
 make run
+````
+
+### Install provider config
+
+First, create a `secret.yaml` file (using the `secret.yaml.tmpl` as a template)
+
+Then just apply the whole directory:
+
+```
+kubectl apply -f examples/providerconfig/
 ```
 
-Build, push, and install:
+### Now create a resource
 
-```console
-make all
+Example is within the instance directory:
+
 ```
-
-Build binary:
-
-```console
-make build
+kubectl apply -f examples/instance/instance.yaml
 ```
-
-## Report a Bug
-
-For filing bugs, suggesting improvements, or requesting new features, please
-open an [issue](https://github.com/flerwin/provider-jet-vultr/issues).

@@ -8,7 +8,10 @@ import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 	"github.com/flerwin/provider-jet-vultr/config/instance"
+	"github.com/flerwin/provider-jet-vultr/config/kubernetes"
 	"github.com/flerwin/provider-jet-vultr/config/objectstorage"
+	"github.com/flerwin/provider-jet-vultr/config/sshkey"
+	"github.com/flerwin/provider-jet-vultr/config/vpc"
 
 	ujconfig "github.com/upbound/upjet/pkg/config"
 )
@@ -36,6 +39,9 @@ func GetProvider() *ujconfig.Provider {
 		// add custom config functions
 		objectstorage.Configure,
 		instance.Configure,
+		kubernetes.Configure,
+		vpc.Configure,
+		sshkey.Configure,
 	} {
 		configure(pc)
 	}

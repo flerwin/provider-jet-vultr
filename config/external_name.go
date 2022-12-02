@@ -12,6 +12,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
 	"vultr_object_storage": config.IdentifierFromProvider,
 	"vultr_instance":       config.IdentifierFromProvider,
+	"vultr_kubernetes":     config.IdentifierFromProvider,
+	"vultr_vpc":            config.IdentifierFromProvider,
+	"vultr_ssh_key":        config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the

@@ -15,3 +15,21 @@ func (l *InstanceList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this KubernetesList.
+func (l *KubernetesList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPCList.
+func (l *VPCList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}

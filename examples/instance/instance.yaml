@@ -1,0 +1,10 @@
+apiVersion: vultr.vultr.upbound.io/v1alpha1
+kind: Instance
+metadata:
+  name: my-instance
+spec:
+  forProvider:
+    osId: 1968
+    plan: vc2-1c-1gb
+    region: syd
+

@@ -1,0 +1,15 @@
+apiVersion: vultr.vultr.upbound.io/v1alpha1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vultr/v1alpha1/vpc
+  labels:
+    testing.upbound.io/example-name: my_vpc
+  name: my-vpc
+spec:
+  forProvider:
+    description: my vpc
+    region: ewr
+
+---
+

@@ -9,6 +9,10 @@ Vultr API.
 
 Very quick overview on how to get up and running.
 
+Also note, this was created as just to get things up and running for myself, since I am moving from Digital Ocean to Vultr.
+
+The main goal of this repo, is just to have things that I require...
+
 ### Install Crossplane
 
 Get crossplane installed by doing something like the following:

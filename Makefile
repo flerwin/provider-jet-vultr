@@ -13,7 +13,7 @@ export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-vultr
 export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-vultr_2.11.4
 export TERRAFORM_DOCS_PATH := website/docs/r
 
-PLATFORMS ?= linux_amd64 linux_arm64
+PLATFORMS ?= linux_arm64
 
 # -include will silently skip missing files, which allows us
 # to load those files with a target in the Makefile. If only
@@ -57,7 +57,7 @@ UPTEST_VERSION = v0.2.1
 # ====================================================================================
 # Setup Images
 
-REGISTRY_ORGS ?= xpkg.upbound.io/upbound
+REGISTRY_ORGS ?= ghcr.io/flerwin
 IMAGES = $(PROJECT_NAME)
 -include build/makelib/imagelight.mk
 

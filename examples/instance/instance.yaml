@@ -1,4 +1,4 @@
-apiVersion: vultr.vultr.upbound.io/v1alpha1
+apiVersion: vultr.vultr.flerwin.io/v1alpha1
 kind: Instance
 metadata:
   name: my-instance

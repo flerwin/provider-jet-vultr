@@ -1,4 +1,4 @@
-apiVersion: ssh.vultr.upbound.io/v1alpha1
+apiVersion: ssh.vultr.flerwin.io/v1alpha1
 kind: Key
 metadata:
   annotations:

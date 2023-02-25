@@ -13,7 +13,7 @@ import (
 
 // Package type metadata.
 const (
-	Group   = "vultr.upbound.io"
+	Group   = "vultr.flerwin.io"
 	Version = "v1beta1"
 )
 

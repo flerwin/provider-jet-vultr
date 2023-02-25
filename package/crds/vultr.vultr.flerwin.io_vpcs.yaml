@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: keys.ssh.vultr.upbound.io
+  name: vpcs.vultr.vultr.flerwin.io
 spec:
-  group: ssh.vultr.upbound.io
+  group: vultr.vultr.flerwin.io
   names:
     categories:
     - crossplane
     - managed
     - vultr
-    kind: Key
-    listKind: KeyList
-    plural: keys
-    singular: key
+    kind: VPC
+    listKind: VPCList
+    plural: vpcs
+    singular: vpc
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Key is the Schema for the Keys API. Provides a Vultr SSH key
-          resource. This can be used to create, read, modify, and delete SSH keys.
+        description: VPC is the Schema for the VPCs API. Provides a Vultr VPC resource.
+          This can be used to create, read, and delete VPCs on your Vultr account.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: KeySpec defines the desired state of Key
+            description: VPCSpec defines the desired state of VPC
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,15 +64,23 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  name:
-                    description: The name/label of the SSH key.
+                  description:
+                    description: The description you want to give your VPC.
                     type: string
-                  sshKey:
-                    description: The public SSH key.
+                  region:
+                    description: The region ID that you want the VPC to be created
+                      in.
                     type: string
+                  v4Subnet:
+                    description: The IPv4 subnet to be used when attaching instances
+                      to this VPC.
+                    type: string
+                  v4SubnetMask:
+                    description: 'The number of bits for the netmask in CIDR notation.
+                      Example: 32'
+                    type: number
                 required:
-                - name
-                - sshKey
+                - region
                 type: object
               providerConfigRef:
                 default:
@@ -246,15 +254,15 @@ spec:
             - forProvider
             type: object
           status:
-            description: KeyStatus defines the observed state of Key.
+            description: VPCStatus defines the observed state of VPC.
             properties:
               atProvider:
                 properties:
                   dateCreated:
-                    description: The date the SSH key was added to your Vultr account.
+                    description: The date that the VPC was added to your Vultr account.
                     type: string
                   id:
-                    description: The ID of the SSH key.
+                    description: ID of the VPC.
                     type: string
                 type: object
               conditions:

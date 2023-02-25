@@ -7,6 +7,7 @@ package config
 import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
+	"fmt"
 	"github.com/flerwin/provider-jet-vultr/config/instance"
 	"github.com/flerwin/provider-jet-vultr/config/kubernetes"
 	"github.com/flerwin/provider-jet-vultr/config/objectstorage"
@@ -34,6 +35,8 @@ func GetProvider() *ujconfig.Provider {
 		ujconfig.WithDefaultResourceOptions(
 			ExternalNameConfigurations(),
 		))
+
+	pc.RootGroup = fmt.Sprintf("%s.flerwin.io", resourcePrefix)
 
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions

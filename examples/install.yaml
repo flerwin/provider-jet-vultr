@@ -3,4 +3,4 @@ kind: Provider
 metadata:
   name: provider-jet-vultr
 spec:
-  package: ghcr.io/flerwin/provider-jet-vultr:latest
+  package: ghcr.io/flerwin/provider-jet-vultr:master

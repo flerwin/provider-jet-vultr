@@ -61,8 +61,6 @@ REGISTRY_ORGS ?= ghcr.io/flerwin
 IMAGES = $(PROJECT_NAME)
 -include build/makelib/imagelight.mk
 
-FULL_REGISTRY = ghcr.io/flerwin/provider-jet-vultr
-
 # ====================================================================================
 # Setup XPKG
 
@@ -178,10 +176,6 @@ local-deploy: build controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME)
 	@$(OK) running locally built provider
 
 e2e: local-deploy uptest
-
-publish-latest: publish
-	@$(INFO) Promoting package from $(FULL_REGISTRY):$(VERSION) to $(FULL_REGISTRY):latest
-	@docker tag $(FULL_REGISTRY):$(VERSION) $(FULL_REGISTRY):latest
 
 .PHONY: cobertura submodules fallthrough run crds.clean
 

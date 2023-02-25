@@ -193,4 +193,7 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
 
       - name: Publish Artifacts
-        run: make publish-latest BRANCH_NAME=${GITHUB_REF##*/}
+        run: make publish BRANCH_NAME=${GITHUB_REF##*/}
+
+      - name: Promote to master
+        run: make promote CHANNEL=master

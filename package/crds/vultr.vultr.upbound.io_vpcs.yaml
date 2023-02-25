@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: instances.vultr.vultr.flerwin.io
+  name: vpcs.vultr.vultr.upbound.io
 spec:
-  group: vultr.vultr.flerwin.io
+  group: vultr.vultr.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - vultr
-    kind: Instance
-    listKind: InstanceList
-    plural: instances
-    singular: instance
+    kind: VPC
+    listKind: VPCList
+    plural: vpcs
+    singular: vpc
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,9 +35,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Instance is the Schema for the Instances API. Provides a Vultr
-          instance resource. This can be used to create, read, modify, and delete
-          instances on your Vultr account.
+        description: VPC is the Schema for the VPCs API. Provides a Vultr VPC resource.
+          This can be used to create, read, and delete VPCs on your Vultr account.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -52,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: InstanceSpec defines the desired state of Instance
+            description: VPCSpec defines the desired state of VPC
             properties:
               deletionPolicy:
                 default: Delete
@@ -65,134 +64,22 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  activationEmail:
-                    description: Whether an activation email will be sent when the
-                      server is ready.
-                    type: boolean
-                  appId:
-                    description: The ID of the Vultr application to be installed on
-                      the server. See List Applications
-                    type: number
-                  backups:
-                    description: Whether automatic backups will be enabled for this
-                      server (these have an extra charge associated with them). Values
-                      can be enabled or disabled.
+                  description:
+                    description: The description you want to give your VPC.
                     type: string
-                  backupsSchedule:
-                    description: A block that defines the way backups should be scheduled.
-                      While this is an optional field if backups are enabled this
-                      field is mandatory. The configuration of a backups_schedule
-                      is listed below.
-                    items:
-                      properties:
-                        dom:
-                          description: Day of month to run. Use values between 1 and
-                            28.
-                          type: number
-                        dow:
-                          description: Day of week to run. 1 = Sunday, 2 = Monday,
-                            3 = Tuesday, 4 = Wednesday, 5 = Thursday, 6 = Friday,
-                            7 = Saturday
-                          type: number
-                        hour:
-                          description: Hour of day to run in UTC.
-                          type: number
-                        type:
-                          description: Type of backup schedule Possible values are
-                            daily, weekly, monthly, daily_alt_even, or daily_alt_odd.
-                          type: string
-                      required:
-                      - type
-                      type: object
-                    type: array
-                  ddosProtection:
-                    description: Whether DDOS protection will be enabled on the server
-                      (there is an additional charge for this).
-                    type: boolean
-                  enableIpv6:
-                    description: Whether the server has IPv6 networking activated.
-                    type: boolean
-                  firewallGroupId:
-                    description: The ID of the firewall group to assign to the server.
-                    type: string
-                  hostname:
-                    description: The hostname to assign to the server. The hostname
-                      of the instance. Updating the hostname will cause a force new.
-                      This behavior is in place to prevent accidental reinstalls.
-                      Issuing an update to the hostname on UI or API issues a reinstall
-                      of the OS.
-                    type: string
-                  imageId:
-                    description: 'The ID of the Vultr marketplace application to be
-                      installed on the server. See List Applications Note marketplace
-                      applications are denoted by type: marketplace and you must use
-                      the image_id not the id.'
-                    type: string
-                  isoId:
-                    description: The ID of the ISO file to be installed on the server.
-                      See List ISO
-                    type: string
-                  label:
-                    description: A label for the server.
-                    type: string
-                  osId:
-                    description: The ID of the operating system to be installed on
-                      the server. See List OS
-                    type: number
-                  plan:
-                    description: The ID of the plan that you want the instance to
-                      subscribe to. See List Plans
-                    type: string
-                  privateNetworkIds:
-                    description: '(Deprecated: use vpc_ids instead) A list of private
-                      network IDs to be attached to the server.'
-                    items:
-                      type: string
-                    type: array
                   region:
-                    description: The ID of the region that the instance is to be created
-                      in. See List Regions
+                    description: The region ID that you want the VPC to be created
+                      in.
                     type: string
-                  reservedIpId:
-                    description: ID of the floating IP to use as the main IP of this
-                      server.
+                  v4Subnet:
+                    description: The IPv4 subnet to be used when attaching instances
+                      to this VPC.
                     type: string
-                  scriptId:
-                    description: The ID of the startup script you want added to the
-                      server.
-                    type: string
-                  snapshotId:
-                    description: The ID of the Vultr snapshot that the server will
-                      restore for the initial installation. See List Snapshots
-                    type: string
-                  sshKeyIds:
-                    description: A list of SSH key IDs to apply to the server on install
-                      (only valid for Linux/FreeBSD).
-                    items:
-                      type: string
-                    type: array
-                  tag:
-                    description: '(Deprecated: use tags instead)  The tag to assign
-                      to the server.'
-                    type: string
-                  tags:
-                    description: A list of tags to apply to the instance.
-                    items:
-                      type: string
-                    type: array
-                  userData:
-                    description: Generic data store, which some provisioning tools
-                      and cloud operating systems use as a configuration file. It
-                      is generally consumed only once after an instance has been launched,
-                      but individual needs may vary.
-                    type: string
-                  vpcIds:
-                    description: A list of VPC IDs to be attached to the server.
-                    items:
-                      type: string
-                    type: array
+                  v4SubnetMask:
+                    description: 'The number of bits for the netmask in CIDR notation.
+                      Example: 32'
+                    type: number
                 required:
-                - plan
                 - region
                 type: object
               providerConfigRef:
@@ -367,72 +254,16 @@ spec:
             - forProvider
             type: object
           status:
-            description: InstanceStatus defines the observed state of Instance.
+            description: VPCStatus defines the observed state of VPC.
             properties:
               atProvider:
                 properties:
-                  allowedBandwidth:
-                    description: The server's allowed bandwidth usage in GB.
-                    type: number
                   dateCreated:
-                    description: The date the server was added to your Vultr account.
-                    type: string
-                  disk:
-                    description: The description of the disk(s) on the server.
-                    type: number
-                  features:
-                    description: Array of which features are enabled.
-                    items:
-                      type: string
-                    type: array
-                  gatewayV4:
-                    description: The server's IPv4 gateway.
+                    description: The date that the VPC was added to your Vultr account.
                     type: string
                   id:
-                    description: ID of the server.
+                    description: ID of the VPC.
                     type: string
-                  internalIp:
-                    description: The server's internal IP address.
-                    type: string
-                  kvm:
-                    description: The server's current KVM URL. This URL will change
-                      periodically. It is not advised to cache this value.
-                    type: string
-                  mainIp:
-                    description: The server's main IP address.
-                    type: string
-                  netmaskV4:
-                    description: The server's IPv4 netmask.
-                    type: string
-                  os:
-                    description: The string description of the operating system installed
-                      on the server.
-                    type: string
-                  powerStatus:
-                    description: Whether the server is powered on or not.
-                    type: string
-                  ram:
-                    description: The amount of memory available on the server in MB.
-                    type: number
-                  serverStatus:
-                    description: A more detailed server status (none, locked, installingbooting,
-                      isomounting, ok).
-                    type: string
-                  status:
-                    description: The status of the server's subscription.
-                    type: string
-                  v6MainIp:
-                    description: The main IPv6 network address.
-                    type: string
-                  v6Network:
-                    description: The IPv6 subnet.
-                    type: string
-                  v6NetworkSize:
-                    description: The IPv6 network size in bits.
-                    type: number
-                  vcpuCount:
-                    description: The number of virtual CPUs available on the server.
-                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

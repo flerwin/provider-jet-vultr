@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: kubernetes.vultr.vultr.flerwin.io
+  name: storages.object.vultr.upbound.io
 spec:
-  group: vultr.vultr.flerwin.io
+  group: object.vultr.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - vultr
-    kind: Kubernetes
-    listKind: KubernetesList
-    plural: kubernetes
-    singular: kubernetes
+    kind: Storage
+    listKind: StorageList
+    plural: storages
+    singular: storage
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,9 +35,9 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Kubernetes is the Schema for the Kubernetess API. Provides a
-          Vultr Kubernetes Engine (VKE) resource. This can be used to create, read,
-          modify, and delete VKE clusters on your Vultr account.
+        description: Storage is the Schema for the Storages API. Provides a Vultr
+          private object storage resource. This can be used to create, read, update
+          and delete object storage resources on your Vultr account.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -52,7 +52,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: KubernetesSpec defines the desired state of Kubernetes
+            description: StorageSpec defines the desired state of Storage
             properties:
               deletionPolicy:
                 default: Delete
@@ -65,54 +65,15 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  clusterId:
+                    description: The region ID that you want the network to be created
+                      in.
+                    type: number
                   label:
-                    description: The VKE clusters label.
-                    type: string
-                  nodePools:
-                    description: Contains the default node pool that was deployed.
-                    items:
-                      properties:
-                        autoScaler:
-                          description: Enable the auto scaler for the default node
-                            pool.
-                          type: boolean
-                        label:
-                          description: The VKE clusters label.
-                          type: string
-                        maxNodes:
-                          description: The maximum number of nodes to use with the
-                            auto scaler.
-                          type: number
-                        minNodes:
-                          description: The minimum number of nodes to use with the
-                            auto scaler.
-                          type: number
-                        nodeQuantity:
-                          description: The number of nodes in this node pool.
-                          type: number
-                        plan:
-                          description: The plan to be used in this node pool. See
-                            Plans List Note the minimum plan requirements must have
-                            at least 1 core and 2 gbs of memory.
-                          type: string
-                      required:
-                      - label
-                      - nodeQuantity
-                      - plan
-                      type: object
-                    type: array
-                  region:
-                    description: The region your VKE cluster will be deployed in.
-                      Currently, supported values are ewr and lax
-                    type: string
-                  version:
-                    description: The version your VKE cluster you want deployed. See
-                      Available Version
+                    description: The description you want to give your network.
                     type: string
                 required:
-                - label
-                - region
-                - version
+                - clusterId
                 type: object
               providerConfigRef:
                 default:
@@ -286,74 +247,27 @@ spec:
             - forProvider
             type: object
           status:
-            description: KubernetesStatus defines the observed state of Kubernetes.
+            description: StorageStatus defines the observed state of Storage.
             properties:
               atProvider:
                 properties:
-                  clusterSubnet:
-                    description: IP range that your pods will run on in this cluster.
-                    type: string
                   dateCreated:
-                    description: Date of VKE cluster creation.
-                    type: string
-                  endpoint:
-                    description: Domain for your Kubernetes clusters control plane.
+                    description: Date of creation for the object storage subscription.
                     type: string
                   id:
-                    description: The VKE cluster ID.
+                    description: The id of the object storage subscription.
                     type: string
-                  ip:
-                    description: IP address of VKE cluster control plane.
+                  location:
+                    description: The location which this subscription resides in.
                     type: string
-                  kubeConfig:
-                    description: Base64 encoded Kubeconfig for this VKE cluster. Base64
-                      encoded KubeConfig
+                  region:
+                    description: The region ID of the object storage subscription.
                     type: string
-                  nodePools:
-                    description: Contains the default node pool that was deployed.
-                    items:
-                      properties:
-                        dateCreated:
-                          description: Date of VKE cluster creation.
-                          type: string
-                        dateUpdated:
-                          description: Date of node pool updates.
-                          type: string
-                        id:
-                          description: The VKE cluster ID.
-                          type: string
-                        nodes:
-                          description: Array that contains information about nodes
-                            within this node pool.
-                          items:
-                            properties:
-                              dateCreated:
-                                description: Date of VKE cluster creation.
-                                type: string
-                              id:
-                                description: The VKE cluster ID.
-                                type: string
-                              label:
-                                description: The VKE clusters label.
-                                type: string
-                              status:
-                                description: The overall status of the cluster.
-                                type: string
-                            type: object
-                          type: array
-                        status:
-                          description: The overall status of the cluster.
-                          type: string
-                        tag:
-                          description: Tag for node pool.
-                          type: string
-                      type: object
-                    type: array
-                  serviceSubnet:
-                    description: IP range that services will run on this cluster.
+                  s3Hostname:
+                    description: The hostname for this subscription.
                     type: string
                   status:
-                    description: The overall status of the cluster.
+                    description: Current status of this object storage subscription.
                     type: string
                 type: object
               conditions:

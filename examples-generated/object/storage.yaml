@@ -1,4 +1,4 @@
-apiVersion: object.vultr.flerwin.io/v1alpha1
+apiVersion: object.vultr.upbound.io/v1alpha1
 kind: Storage
 metadata:
   annotations:
